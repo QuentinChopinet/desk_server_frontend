@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<!--Alarme simple-->
+
+
+<html lang="fr">
+	<head>
+		<link rel="icon" type="image/png" href="images/logo_alarm.png" />
+		<meta charset="utf-8" />
+		<meta name="theme-color" content="#321a01">
+			<title> Serveur Tankin </title>
+
+		<link rel="stylesheet" href="style_sheet.css">
+		<style>
+			/*Color specific to the page*/
+			body {background-color :  rgb(29, 29, 29);}
+			p, h1, h2, h3, a, label, legend, div {color:rgba(255, 100, 0, 0.8);            }
+			button, input, select {background-color: rgba(255, 100, 0, 0.8);}
+			fieldset {border-color: rgba(255, 100, 0, 0.8);}
+		</style>
+
+ 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		
+		<script type="text/javascript">
+		$(document).ready(function(){
+			function requete(){
+                                var demo = document.getElementById("demo");
+                                var a = new XMLHttpRequest();
+                                a.open("GET","php_file/read_simple_alarm.php");
+                                a.onreadystatechange=function(){
+                                        if(a.readyState==4){
+                                            if(a.status == 200){
+                                                var res = this.response;
+                                                console.log(this.response);
+                                                demo.innerHTML = res.msg;
+                                            }else{
+                                                alert("HTTP ERROR");
+                                            }
+                                        }
+                                }
+
+                                a.responseType = "json";
+                                a.send();
+                        }
+			
+			//formulaire de saisie de l'heure
+			document.getElementById("horaire").addEventListener("submit", function(e) {
+				e.preventDefault();
+ 
+				var data = new FormData(this);
+ 
+				var xhr = new XMLHttpRequest();
+ 
+				xhr.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						var res = this.response;
+						alert(res.msg);
+						console.log(this.response);
+						window.location.reload();
+						requete();
+					} else if (this.readyState == 4) {
+						alert("Une erreur est survenue...");
+					}
+				};
+ 
+				xhr.open("POST", "php_file/simple_alarm.php", true);
+				xhr.responseType = "json";
+				xhr.send(data);
+ 
+				return false;
+			});
+
+			//bouton désactiver
+			$('#set_alarm_OFF').click(function(){
+				var a = new XMLHttpRequest();
+				a.open("POST","php_file/desactive_simple_alarm.php");
+				a.onreadystatechange=function(){
+                                        if(a.readyState==4){
+                                            if(a.status == 200){
+						var res = this.response;
+                                               	alert(res.msg);
+                                             	console.log(this.response);
+						//window.location.reload();
+						requete();
+                                            }else{
+                                                alert("HTTP ERROR");
+                                            }
+                                        }
+                                }
+
+                                a.responseType = "json";
+				a.send();
+			});
+/*
+			function requete() {
+				var demo = document.getElementById("demo");
+				var xhr = new XMLHttpRequest();
+ 
+				xhr.onreadystatechange = function() {
+					console.log(this);
+					if (this.readyState == 4 && this.status == 200) {
+						console.log(this.responseText);
+						if(this.responseText[0]==9){
+							demo.innerHTML = "Pas d'alarme programmée"
+						}else{
+							demo.innerHTML = this.responseText;
+						}
+					} else if (this.readyState == 4 && this.status == 404) {
+						alert('Erreur 404 :/');
+					}
+				};
+ 
+				xhr.open("GET", "php_file/alarm_time.txt", true);
+				xhr.responseType = "text";
+				xhr.send();
+			}
+*/
+			requete();
+			//bouton actualiser
+			/*$('#actualiser').click(function(){
+				requete();
+			});*/
+		});
+		</script>
+
+	</head>
+		
+		
+	<body>
+		<!--ici le contenu de la page-->
+		<h1> Gestion des alarmes </h1>
+
+		<p> Programmation de l'allumage des LEDs à </p>
+        <form id="horaire">
+        	<input type="time" placeholder="time" name="time_alarm" id="time_alarm" required>&emsp;
+		<input type="submit" value="Valider">
+	</form>	
+	<br/><br/><br/>
+
+
+	
+	<fieldset> <legend> Alarme programmée à :<br/> <a href="javascript:window.location.reload()">(Actualiser)</a> 
+		<!--<br/><button type"button" id="actualiser">Actualiser</button>--> 
+
+		</legend> <div id="demo"></div>
+	</fieldset>
+	
+	<br/><br/><br/><br/>
+	<button type="button" id="set_alarm_OFF"> Désactiver toutes les alarmes </button>
+        
+	<br/><br/> <br/> <br/>
+	<p>V2.1</p>
+        <p>Pour plus d'options cliquer <a href="menu_page.html"> ici</a>.</p>
+        <p>quentin.chopinet@gmail.com</p>
+        </center>
+	</body>
+</html>

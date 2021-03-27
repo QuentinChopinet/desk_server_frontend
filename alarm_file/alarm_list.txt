@@ -1,0 +1,8 @@
+1/Arte journal/19:43/ras/pong/ras/ras/7/lun/mar/mer/jeu/ven/sam/dim/
+2/Li re/21:00/off/off/on/off/7/lun/mar/mer/jeu/ven/sam/dim/
+3/Bonne nuit/21:40/off/off/off/off/7/lun/mar/mer/jeu/ven/sam/dim/
+4/Théâtre/08:20/ras/sun/ras/ras/1/sam/
+5/Partir au train/06:45/ras/warn/ras/ras/4/lun/mar/jeu/ven/
+6/Extinction plus personne/07:05/off/off/off/off/4/lun/mar/jeu/ven/
+7/Réveil semaine/06:18/ras/sun/ras/ras/4/lun/mar/jeu/ven/
+8/Réveil télétravail/08:20/ras/sun30/ras/ras/1/mer/

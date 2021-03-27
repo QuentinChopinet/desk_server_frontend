@@ -1,0 +1,2 @@
+
+50 18 * * * python /home/pi/toggle.py

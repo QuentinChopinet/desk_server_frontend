@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<link rel="icon" type="image/png" href="images/logo_wd.png" />
+	<meta charset="UTF-8">
+        <meta name="theme-color" content="#003030">
+        
+        <title>BLACKOUT</title>
+
+        <link rel="stylesheet" href="style_sheet.css">
+		<style>
+			/*Color specific to the page*/
+			body {background-color :  rgb(0, 50, 50);}
+			p, h1, h2, h3, a, label, legend, div {color:rgb(100, 100, 100);            }
+			button, select {background-color: rgb(100, 100, 100);}
+			fieldset {border-color: rgb(100, 100, 100);}
+			
+        </style>
+
+
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript">
+        
+            $(document).ready(function(){
+
+                $('#blackout').click(function(){
+                    var a = new XMLHttpRequest();
+                    a.open("GET","blackout.php");
+                    a.onreadystatechange=function(){
+                        if(a.readyState==4){
+                            if(a.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    a.send();
+             
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <center>
+        
+	<input type="image" id="blackout" alt="Login" src="/images/blackout_wd.png">
+        </input>
+        <br/> <br/> <br/>
+        
+        
+
+        <p>V2.1</p>
+        <p>Pour plus d'options cliquer <a href="menu_page.html"> ici</a>.</p>
+        <p>quentin.chopinet@gmail.com</p>
+        </center>
+    </body>
+    
+</html>

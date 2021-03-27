@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<link rel="icon" type="image/png" href="images/logo_alarm_2.png" />
+		<meta charset="utf-8" />
+		<meta name="theme-color" content="#17092a">
+			<title> Serveur Tankin </title>
+
+		<link rel="stylesheet" href="style_sheet.css">
+		<style>
+			/*Color specific to the page*/
+			body {background-color :  rgb(10, 10, 10);}
+			p, h1, h2, h3, a, label, legend, div {color:rgba(100, 40, 180, 1);}
+			button, input, select {background-color: rgba(100, 40, 180, 0.9);}
+			fieldset {border-color: rgba(100, 40, 180, 0.9);}
+			
+			#refresh_alarm_list{
+					background-color: rgb(10, 10, 10) ;
+                                        border: none;
+                                        border-radius: 0px;
+                                        color: rgba(100, 40, 180, 1);
+					padding: 0px 0px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 16px;
+					text-decoration: underline;
+			}
+		</style>
+		
+ 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			function load_alarm_list(){
+				var alarm_list = document.getElementById("alarm_list");
+                                var a = new XMLHttpRequest();
+                                a.open("GET","alarm_file/read_alarm.php");
+                                a.onreadystatechange=function(){
+                                        if(a.readyState==4){
+                                            if(a.status == 200){
+                                                var res = this.response;
+                                                //alert(res.msg);
+                                                console.log(this.response);
+                                                alarm_list.innerHTML = res.text;
+                                            }else{
+                                                alert("HTTP ERROR");
+                                            }
+                                        }
+                                }
+                                a.responseType = "json";
+                                a.send();
+			};			
+
+			//ajouter une alarme
+			document.getElementById("add_alarm").addEventListener("submit", function(e) {
+				e.preventDefault();
+ 
+				var data = new FormData(this);
+ 
+				var xhr = new XMLHttpRequest();
+ 
+				xhr.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						var res = this.response;
+						alert(res.msg);
+						console.log(this.response);
+						load_alarm_list();
+					} else if (this.readyState == 4) {
+						alert("Une erreur est survenue...");
+					}
+				};
+ 
+				xhr.open("POST", "alarm_file/add_alarm.php", true);
+				xhr.responseType = "json";
+				xhr.send(data);
+ 
+				return false;
+			});
+
+			//supprime l'alarme demandée
+			document.getElementById("del_alarm").addEventListener("submit", function(e) {
+				e.preventDefault();
+ 
+				var data = new FormData(this);
+ 
+				var xhr = new XMLHttpRequest();
+ 
+				xhr.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						var res = this.response;
+						alert(res.msg);
+						console.log(this.response);
+						load_alarm_list();
+					} else if (this.readyState == 4) {
+						alert("Une erreur est survenue...");
+					}
+				};
+ 
+				xhr.open("POST", "alarm_file/del_alarm.php", true);
+				xhr.responseType = "json";
+				xhr.send(data);
+ 
+				return false;
+			});
+			
+			$('#refresh_alarm_list').click(function(){
+                                load_alarm_list();
+                        });
+			load_alarm_list();
+			
+		});
+		</script>
+
+	</head>
+		
+		
+	<body>
+		<!--ici le contenu de la page-->
+		<h1> Gestion des alarmes </h1>
+
+		<h2> Programmation d'une nouvelle alarme </h2>
+        <form id="add_alarm">
+			<label for="time_alarm">choisissez un nom :</label>
+			<input type="text" placeholder="nom de l'alarme" name="alarm_name"><br/>
+
+			<label for="time_alarm">choisissez un horaire :</label>
+			<input type="time" placeholder="time" name="time_alarm" id="time_alarm" required><br/>
+			
+			<br/>
+			<h3>Action à réaliser :</h3>
+			<table>
+				<tr>
+					<td width="150" height="70"><p>Lampe Bureau</p></td>
+					<td><select name="action_1" id="action_1">
+						<option value="ras">Ne rien faire</option>
+						<option value="on">ON</option>
+						<option value="off">OFF</option>
+						<option value="ch1">changement d'état</option>
+						<option value="ch2">changement d'état x2</option>
+						</select></td>
+				</tr>
+				<tr>
+					<td height="70"><p>Ruban LED</p></td>
+					<td><select name="action_2" id="action_2">
+						<option value="ras">Ne rien faire</option>
+						<option value="on">ON</option>
+						<option value="off">OFF</option>
+						<option	value="ch1">changement d'état</option>
+						<option value="ch2">changement d'état x2</option>
+						<option value="sun">levé de soleil 1 min</option> 
+						<option value="sun30">levé de soleil 30 min</option>
+                                                <option value="warn">feu de détresse</option>
+						<option value="pong">ping-pong</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td height="70"><p>Lampe Chevet</p></td>
+					<td><select name="action_3" id="action_3">
+						<option value="ras">Ne rien faire</option>
+						<option value="on">ON</option>
+						<option value="off">OFF</option>
+						<option value="ch1">changement d'état</option>
+						<option value="ch2">changement d'état x2</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td height="70"><p>Halogène</p></td>
+					<td>
+					<select name="action_4" id="action_4">
+						<option value="ras">Ne rien faire</option>
+						<option value="on">ON</option>
+						<option value="off">OFF</option>
+						<option value="ch1">changement d'état</option>
+						<option value="ch2">changement d'état x2</option>
+					</select>
+					</td>
+				</tr>
+			</table>
+			<br/>
+			
+			<h3>Répétition :</h3>
+			<table>
+				<tr>
+					<td>
+						<div>
+							<input type="radio" id="one_shot" name="repetition" value="0" checked>
+							<label for="one_shot">Une seule fois</label>
+						</div>
+					</td>
+					<td>
+						<p>(Une fois l'alarme passée elle sera automatiquement supprimée)</p>
+					</td>
+				<tr>
+					<td>
+						<div>
+							<input type="radio" id="week" name="repetition" value="1">
+							<label for="week">Répéter tous les :</label>
+						  </div>
+					</td>
+					<td>
+						<div>
+							<input type="checkbox" id="lun" name='day[]' value="lun">
+							<label for="lun">Lundis</label>
+						</div>
+						<div>
+							<input type="checkbox" id="mar" name='day[]' value="mar">
+							<label for="mar">Mardis</label>
+						</div>
+						<div>
+							<input type="checkbox" id="mer" name='day[]' value="mer">
+							<label for="mer">Mercredis</label>
+						</div>
+						<div>
+							<input type="checkbox" id="jeu" name='day[]' value="jeu">
+							<label for="jeu">Jeudis</label>
+						</div>
+						<div>
+							<input type="checkbox" id="ven" name='day[]' value="ven">
+							<label for="ven">Vendredis</label>
+						</div>
+						<div>
+							<input type="checkbox" id="sam" name='day[]' value="sam">
+							<label for="sam">Samedis</label>
+						</div>
+						<div>
+							<input type="checkbox" id="dim" name='day[]' value="dim">
+							<label for="dim">Dimanches</label>
+						</div>
+					</td>
+				</tr>
+			</table>
+
+			<br/>
+			<input id="validation_button" type="submit" value="Valider">&emsp;
+		</form>	
+
+		<br/><br/><br/>
+
+
+
+		<h2> Liste des alarmes programmées </h2>
+	
+		<fieldset>
+			<legend><button type"button" id="refresh_alarm_list">Actualiser</button> </legend>
+			<div id="alarm_list"></div>
+		</fieldset>
+		
+		<br/><br/><br/><br/>
+
+
+
+		<h2> Suppression d'une alarme </h2>
+				
+		<form id="del_alarm">
+			<label for="alarm_number">Sélectionner le numéro de l'alarme à supprimer :</label>
+			<input type="text" placeholder="numéro de l'alarme" name="alarm_number" id="alarm_number" required><br/>
+			<input type="submit" value="Désactiver l'alarme">
+		</form>
+			
+		<br/><br/> <br/> <br/>
+		<p>V2.1</p>
+		<p>Pour plus d'options cliquer <a href="menu_page.html"> ici</a>.</p>
+		<p>quentin.chopinet@gmail.com</p>
+	</body>
+</html>

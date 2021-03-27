@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <link rel="icon" type="image/png" href="logo_fun.png" />
+
+        <title>Fun</title>
+        <style>
+        body {
+                width: 35em;
+                margin: 0 auto;
+                font-family: Tahoma, Verdana, Arial, sans-serif;
+                background-color :  rgb(20, 20, 20);
+                padding-bottom: 100px;
+        }
+        p, h1, label {
+            color:rgb(200, 20, 226);
+        }
+        button, input {
+                background-color: rgba(200, 20, 226);
+                border: none;
+                border-radius: 8px;
+                color: black;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;  
+        }
+        footer {
+                position: relative;
+                height: 100px;
+                margin-top: -100px;
+                clear : both;
+        }
+        </style>
+
+
+        <meta charset="UTF-8">
+	<meta name="theme-color" content="#06282d">
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="light_manager.js"></script>
+    </head>
+
+    <body>
+        <center>
+        <h1>Bienvenue dans la zone d'experience !</h1>
+        <p>A partir de cette photo, vous pourrez contrôler l'éclairage de ma chambre</p>
+
+
+
+        <!--https://developer.mozilla.org/fr/docs/Apprendre/HTML/Comment/Ajouter_carte_zones_cliquables_sur_image-->
+
+        <img src="Capture.JPG" alt="" usemap="#pirate_pinup-map-1" />
+
+        <map name="pirate_pinup-map-1">
+
+            <!--Yeux-->
+            <area shape="circle" coords="213, 155, 30" alt="oeil droit"  id="buttonON1"/>
+            <area shape="circle" coords="276, 170, 25" alt="oeil gauche" id="buttonOFF1"/>
+
+            <!--Seins-->
+            <area shape="circle" coords="230,355,70" alt="seins droit"  id="buttonON2"/>
+            <area shape="circle" coords="410, 360, 60" alt="seins gauche" id="buttonOFF2" title="Sein gauche"/>
+
+            <!--Main-->
+            <area shape="rect" coords="120, 575, 225, 750" alt="main droite"  id="buttonON3"/>
+            <area shape="circle" coords="550, 430, 55" alt="main gauche" id="buttonOFF3"/>
+
+            <!--Cuisse-->
+            <area shape="poly" coords="380, 633, 560, 658, 668, 694, 665, 883, 462, 875, 335, 824" alt="cuisse droite"  id="buttonON4"/>
+            <area shape="poly" coords="516, 578, 509, 643, 572, 651, 666, 686, 666, 402, 613, 451, 561, 523" alt="cuisse gauche" id="buttonOFF4"/>
+
+
+            <!--<area shape="rect" coords="120, 575, 225, 750" href="" alt="exemple de rectangle" /> <!--href utile pour localiser la zone avec TAB-->-->
+            <area shape="poly" coords="503, 541, 512, 583, 503, 644, 427, 638, 383, 572, 430, 600, 490, 600" alt="culotte" title="Pas touche !" id="buttonBlackout"/>
+        </map>
+
+
+        <br/>
+
+        
+        <br/> <br/> <br/>
+        
+        
+
+        <p>V2.1</p>
+        <p>Pour plus d'options cliquer <a href="./../../menu_page.html"> ici</a>.</p>
+        <p>quentin.chopinet@gmail.com</p>
+        </center>
+    </body>
+    
+</html>

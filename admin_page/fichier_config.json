@@ -1,0 +1,10 @@
+{
+    "physical_switch": 1,
+    "web_switch": 1,
+    "simple_alarm": 0,
+    "advanced_alarm": 0,
+    "winter_mode": 0,
+    "musical_entrance": 0,
+    "baby_driver": 0,
+    "disco": 0
+}

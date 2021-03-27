@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <link rel="icon" type="image/png" href="images/logo_control.png" />
+
+        <title>Tankin Home</title>
+        <style>
+        body {
+                width: 35em;
+                margin: 0 auto;
+                font-family: Tahoma, Verdana, Arial, sans-serif;
+                background-color :  rgb(20, 20, 20);
+                padding-bottom: 100px;
+        }
+        p, h1, label {
+            color:rgb(42, 205, 226);
+        }
+        button, input {
+                background-color: rgba(42, 205, 226);
+                border: none;
+                border-radius: 8px;
+                color: black;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;  
+        }
+        footer {
+                position: relative;
+                height: 100px;
+                margin-top: -100px;
+                clear : both;
+        }
+        </style>
+
+
+        <meta charset="UTF-8">
+	<meta name="theme-color" content="#06282d">
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript">
+        
+            $(document).ready(function(){
+                $('#buttonON1').click(function(){
+                    var a = new XMLHttpRequest();
+                    a.open("GET","pinON1.php");
+                    a.onreadystatechange=function(){
+                        if(a.readyState==4){
+                            if(a.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    a.send();
+                });
+
+                $('#buttonOFF1').click(function(){
+                    var a = new XMLHttpRequest();
+                    a.open("GET","pinOFF1.php");
+                    a.onreadystatechange=function(){
+                        if(a.readyState==4){
+                            if(a.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    a.send();
+                });
+
+                $('#buttonON2').click(function(){
+                    var a = new XMLHttpRequest();
+                    a.open("GET","pinON2.php");
+                    a.onreadystatechange=function(){
+                        if(a.readyState==4){
+                            if(a.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    a.send();
+
+		    var b = new XMLHttpRequest();
+                    b.open("GET","./led_file/send_cmd_led.php");
+                    b.onreadystatechange=function(){
+                        if(b.readyState==4){
+                            if(b.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    b.send();
+                });
+
+                $('#buttonOFF2').click(function(){
+                    var a = new XMLHttpRequest();
+                    a.open("GET","pinOFF2.php");
+                    a.onreadystatechange=function(){
+                        if(a.readyState==4){
+                            if(a.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    a.send();
+                });
+
+                $('#buttonON3').click(function(){
+                    var a = new XMLHttpRequest();
+                    a.open("GET","pinON3.php");
+                    a.onreadystatechange=function(){
+                        if(a.readyState==4){
+                            if(a.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    a.send();
+                });
+
+                $('#buttonOFF3').click(function(){
+                    var a = new XMLHttpRequest();
+                    a.open("GET","pinOFF3.php");
+                    a.onreadystatechange=function(){
+                        if(a.readyState==4){
+                            if(a.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    a.send();
+                });
+
+                $('#buttonON4').click(function(){
+                    var a = new XMLHttpRequest();
+                    a.open("GET","pinON4.php");
+                    a.onreadystatechange=function(){
+                        if(a.readyState==4){
+                            if(a.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    a.send();
+                });
+
+                $('#buttonOFF4').click(function(){
+                    var a = new XMLHttpRequest();
+                    a.open("GET","pinOFF4.php");
+                    a.onreadystatechange=function(){
+                        if(a.readyState==4){
+                            if(a.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    a.send();
+                });
+
+                $('#set_alarm_ON4').click(function(){
+                    var a = new XMLHttpRequest();
+                    a.open("GET","set_alarm.php?variable1="+wakeup);
+                    a.onreadystatechange=function(){
+                        if(a.readyState==4){
+                            if(a.status == 200){
+                            }else{
+                                alert("HTTP ERROR");
+                            }
+                        }
+                    }
+                    a.send();
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <center>
+        <h1>Bienvenue sur le Serveur de Tankin !</h1>
+        <p>A partir de cette page, vous pourrez contrôler l'éclairage de ma chambre</p>
+
+        <table>
+            <tr>
+                <td width="150" height="70"><p>Lampe Bureau</p></td>
+                <td><button type="button" id="buttonON1">ON</button></td>
+                <td><button type="button" id="buttonOFF1">OFF</button></td>
+            </tr>
+            <tr>
+                <td height="70"><p>Ruban LED</p></td>
+                <td><button type="button" id="buttonON2">ON</button></td>
+                <td><button type="button" id="buttonOFF2">OFF</button></td>
+            </tr>
+            <tr>
+                <td height="70"><p>Lampe Chevet</p></td>
+                <td><button type="button" id="buttonON3">ON</button></td>
+                <td><button type="button" id="buttonOFF3">OFF</button></td>
+            </tr>
+            <tr>
+                <td height="70"><p>Halogène</p></td>
+                <td><button type="button" id="buttonON4">ON</button></td>
+                <td><button type="button" id="buttonOFF4">OFF</button></td>
+            </tr>
+        </table>
+        <br/>
+
+        
+        <br/> <br/> <br/>
+        
+        
+
+        <p>V2.1</p>
+        <p>Pour plus d'options cliquer <a href="menu_page.html"> ici</a>.</p>
+        <p>quentin.chopinet@gmail.com</p>
+        </center>
+    </body>
+    
+</html>
